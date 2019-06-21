@@ -19,7 +19,9 @@ public class Main
     public static void main(String[] args)
     {
 
-        ReaderInterface reader = new ReaderInputStream();
+//        ReaderInterface reader = new ReaderInputStream();
+        ReaderInterface reader = new ReaderStream();
+
         reader.readFile("src/main/resources/seminar05.text.txt");
 
         TreeSet<WordCounter> treeSet = new TreeSet<>();
