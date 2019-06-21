@@ -1,16 +1,10 @@
 package com.jcourse.seminar_06;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.stream.*;
+import java.nio.file.*;
+import java.util.*;
+import java.io.*;
 
 /**
  * The type Main.
@@ -37,8 +31,11 @@ public class Main
                 .collect(Collectors.groupingBy(word -> word, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .sorted(Comparator.comparingLong
-                    (Map.Entry<String, Long>::getValue).reversed().thenComparing(Map.Entry::getKey)
+                .sorted(
+                    Comparator.comparingLong
+                    (
+                        Map.Entry<String, Long>::getValue).reversed().thenComparing(Map.Entry::getKey
+                    )
                 )
                 .forEach(entry -> {
                     try {
