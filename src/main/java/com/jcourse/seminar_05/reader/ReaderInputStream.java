@@ -27,13 +27,8 @@ public class ReaderInputStream implements ReaderInterface
                 } else {
                     if (Character.isSpaceChar(letter)) {
                         totalWords += 1;
-                        if (!words.containsKey(String.valueOf(output).toLowerCase())) {
-                            if (!output.toString().isEmpty()) {
-                                words.put(String.valueOf(output).toLowerCase(), 1);
-                            }
-                        } else {
-                            int oldValue = words.get(String.valueOf(output).toLowerCase());
-                            words.put(String.valueOf(output).toLowerCase(), oldValue + 1);
+                        if (!output.toString().isEmpty()) {
+                            words.merge(String.valueOf(output).toLowerCase(), 1, Integer::sum);
                         }
                         output = new StringBuilder();
                     }

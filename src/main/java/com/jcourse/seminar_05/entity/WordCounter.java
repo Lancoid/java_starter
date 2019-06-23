@@ -5,7 +5,7 @@ import java.math.*;
 /**
  * The type Word counter.
  */
-public class WordCounter implements java.lang.Comparable
+public class WordCounter implements Comparable<WordCounter>
 {
     private String word;
     private int counter;
@@ -26,17 +26,15 @@ public class WordCounter implements java.lang.Comparable
     }
 
     @Override
-    public int compareTo(Object object)
+    public int compareTo(WordCounter wordCounter)
     {
-        WordCounter entry = (WordCounter) object;
-
-        int result = entry.counter - counter;
-
-        if (result != 0) {
-            return result / Math.abs(result);
+        if (counter < wordCounter.counter) {
+            return 1;
+        } else if (counter > wordCounter.counter) {
+            return -1;
+        } else {
+            return word.compareTo(wordCounter.word);
         }
-
-        return word.compareTo(entry.word);
     }
 
     /**
@@ -69,5 +67,10 @@ public class WordCounter implements java.lang.Comparable
     public double getPercent()
     {
         return new BigDecimal((double) counter * 100 / (double) totalWords).setScale(3, RoundingMode.UP).doubleValue();
+    }
+
+    @Override
+    public String toString() {
+        return "WordCounter{" + "word='" + word + "'" + ", counter=" + counter + "}";
     }
 }

@@ -19,12 +19,7 @@ public class ReaderStream implements ReaderInterface {
                     .flatMap(line -> Arrays.stream(line.toLowerCase().trim().split("[^\\p{L}\\p{N}]+")))
                     .filter(word -> word.length() > 0)
                     .forEach(word -> {
-                        if (!words.containsKey(word)) {
-                            words.put(word, 1);
-                        } else {
-                            int oldValue = words.get(word);
-                            words.put(word, oldValue + 1);
-                        }
+                        words.merge(word, 1, Integer::sum);
                         totalWords++;
                     });
         } catch (IOException e) {
